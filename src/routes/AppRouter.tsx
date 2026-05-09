@@ -14,6 +14,8 @@ import { AdminApprovalsPage } from '../pages/admin/AdminApprovalsPage';
 import { ClientDashboardPage } from '../pages/client/ClientDashboardPage';
 import { ClientShipmentsPage } from '../pages/client/ClientShipmentsPage';
 import { ClientCreateShipmentPage } from '../pages/client/ClientCreateShipmentPage';
+import { ClientEditShipmentPage } from '../pages/client/ClientEditShipmentPage';
+import { ClientDeleteShipmentPage } from '../pages/client/ClientDeleteShipmentPage';
 import { EmployeeDashboardPage } from '../pages/employee/EmployeeDashboardPage';
 import { EmployeeShipmentsPage } from '../pages/employee/EmployeeShipmentsPage';
 import { EmployeeUpdateStatusPage } from '../pages/employee/EmployeeUpdateStatusPage';
@@ -41,6 +43,8 @@ export function AppRouter() {
             <Route path="/client/dashboard" element={<ClientDashboardPage />} />
             <Route path="/client/shipments" element={<ClientShipmentsPage />} />
             <Route path="/client/create-shipment" element={<ClientCreateShipmentPage />} />
+            <Route path="/client/edit-shipment" element={<ClientEditShipmentPage />} />
+            <Route path="/client/delete-shipment" element={<ClientDeleteShipmentPage />} />
           </Route>
 
           <Route element={<ProtectedRoute roles={['EMPLOYEE']} />}>

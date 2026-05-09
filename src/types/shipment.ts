@@ -27,6 +27,12 @@ export interface Shipment {
     email: string;
     role: string;
   };
+  assignedEmployee?: {
+    userId: number;
+    name: string;
+    email: string;
+    role: string;
+  };
   approved?: boolean;
   rejected?: boolean;
 }

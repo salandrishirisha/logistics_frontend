@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Package, Users, Truck, ShieldCheck,
-  ClipboardCheck, LogOut, UserPlus
+  ClipboardCheck, LogOut, UserPlus, Edit3, Trash2
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -25,6 +25,8 @@ export function Sidebar({ open, setOpen }: Props) {
       { label: 'Dashboard', to: '/client/dashboard', icon: LayoutDashboard },
       { label: 'My Shipments', to: '/client/shipments', icon: Package },
       { label: 'Create Shipment', to: '/client/create-shipment', icon: Truck },
+      { label: 'Edit Shipment', to: '/client/edit-shipment', icon: Edit3 },
+      { label: 'Delete Shipment', to: '/client/delete-shipment', icon: Trash2 },
     ],
     EMPLOYEE: [
       { label: 'Dashboard', to: '/employee/dashboard', icon: LayoutDashboard },
