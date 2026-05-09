@@ -3,7 +3,7 @@ import { adminService } from '../../services/adminService';
 import { DataTable } from '../../components/DataTable';
 import { Loader } from '../../components/Loader';
 
-type UserRow = { id: number; name: string; email: string };
+type UserRow = { userId: number; name: string; email: string };
 
 export function AdminClientsPage() {
   const [rows, setRows] = useState<UserRow[]>([]);
@@ -20,9 +20,9 @@ export function AdminClientsPage() {
       <h1 className="text-xl font-bold">Clients</h1>
       <DataTable
         rows={rows}
-        rowKey={(r) => r.id}
+        rowKey={(r) => r.userId}
         columns={[
-          { key: 'id', title: 'ID' },
+          { key: 'userId', title: 'ID' },
           { key: 'name', title: 'Name' },
           { key: 'email', title: 'Email' },
         ]}

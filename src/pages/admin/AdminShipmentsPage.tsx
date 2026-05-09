@@ -57,8 +57,11 @@ export function AdminShipmentsPage() {
             columns={[
               { key: 'shipmentId', title: 'ID' },
               { key: 'itemName', title: 'Item' },
-              { key: 'clientName', title: 'Client' },
-              { key: 'transportMode', title: 'Mode' },
+{
+  key: 'client',
+  title: 'Client',
+  render: (r) => r.clientName || r.client?.name || 'N/A',
+},              { key: 'transportMode', title: 'Mode' },
               { key: 'status', title: 'Status', render: (r) => <StatusBadge status={r.status} /> },
             ]}
           />

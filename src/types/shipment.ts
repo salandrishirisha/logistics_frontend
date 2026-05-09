@@ -19,7 +19,14 @@ export interface Shipment {
   status: ShipmentStatus;
   createdDate: string;
   employeeRemarks?: string;
-  clientName?: string;
+    clientName?: string;
+
+  client?: {
+    userId: number;
+    name: string;
+    email: string;
+    role: string;
+  };
   approved?: boolean;
   rejected?: boolean;
 }
