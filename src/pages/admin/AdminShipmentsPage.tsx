@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { shipmentService } from '../../services/shipmentService';
-import { Shipment } from '../../types/shipment';
+import type { Shipment } from '../../types/shipment';
 import { DataTable } from '../../components/DataTable';
 import { StatusBadge } from '../../components/StatusBadge';
 import { Pagination } from '../../components/Pagination';

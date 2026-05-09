@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { LayoutDashboard, Package, Users, UserPlus, CheckCircle, XCircle } from 'lucide-react';
 import { dashboardService } from '../../services/dashboardService';
 import { shipmentService } from '../../services/shipmentService';
-import { DashboardStats } from '../../types/dashboard';
-import { Shipment } from '../../types/shipment';
+import { StatusBadge } from '../../components/StatusBadge';
+import type { DashboardStats } from '../../types/dashboard';
+import type { Shipment } from '../../types/shipment';
 import { Loader } from '../../components/Loader';
 import { DataTable } from '../../components/DataTable';
 import { EmptyState } from '../../components/EmptyState';
-import   { StatusBadge } from '../../components/StatusBadge';
 
 
 export function AdminDashboardPage() {

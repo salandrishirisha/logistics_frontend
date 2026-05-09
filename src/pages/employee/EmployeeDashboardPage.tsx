@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { dashboardService } from '../../services/dashboardService';
-import { DashboardStats } from '../../types/dashboard';
+import type { DashboardStats } from '../../types/dashboard';
 import { Package, CheckCircle, ClipboardCheck } from 'lucide-react';
 import { Loader } from '../../components/Loader';
 
