@@ -33,10 +33,11 @@ export function AdminDashboardPage() {
 
   const cards = [
     { label: 'Total Shipments', value: stats.totalShipments ?? 0, icon: Package },
-    { label: 'Total Employees', value: stats.totalEmployees ?? 0, icon: Users },
-    { label: 'Total Clients', value: stats.totalClients ?? 0, icon: UserPlus },
+    { label: 'Total Employees', value: stats.employeeCount ?? 0, icon: Users },
+    { label: 'Total Clients', value: stats.clientCount ?? 0, icon: UserPlus },
     { label: 'Approved', value: stats.approvedShipments ?? 0, icon: CheckCircle },
     { label: 'Rejected', value: stats.rejectedShipments ?? 0, icon: XCircle },
+    { label: 'Delivered', value: stats.deliveredShipments ?? 0, icon: XCircle },
     { label: 'Overview', value: 'Admin', icon: LayoutDashboard },
   ];
 

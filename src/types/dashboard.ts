@@ -1,12 +1,12 @@
 export interface DashboardStats {
   totalShipments?: number;
-  totalEmployees?: number;
-  totalClients?: number;
+  employeeCount?: number;
+  clientCount?: number;
   approvedShipments?: number;
   rejectedShipments?: number;
   myShipmentsCount?: number;
   pendingShipments?: number;
   assignedShipments?: number;
-  completedShipments?: number;
+  deliveredShipments?: number;
   pendingVerification?: number;
 }
