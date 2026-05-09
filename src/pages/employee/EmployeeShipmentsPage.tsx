@@ -37,7 +37,7 @@ export function EmployeeShipmentsPage() {
           { key: 'shipmentId', title: 'ID' },
           { key: 'itemName', title: 'Item' },
           { key: 'transportMode', title: 'Mode' },
-          { key: 'createdDate', title: 'Created' },
+          { key: 'shipmentType', title: 'Type' },
           { key: 'status', title: 'Status', render: (r) => <StatusBadge status={r.status} /> },
         ]}
       />

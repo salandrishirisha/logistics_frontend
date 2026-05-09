@@ -1,40 +1,138 @@
 import { useEffect, useState } from 'react';
 import { dashboardService } from '../../services/dashboardService';
+import { employeeService } from '../../services/employeeService';
 import type { DashboardStats } from '../../types/dashboard';
-import { Package, CheckCircle, ClipboardCheck } from 'lucide-react';
+import type { Shipment } from '../../types/shipment';
+import { useAuth } from '../../context/AuthContext';
+import { Package, CheckCircle, Clock, Truck, User } from 'lucide-react';
 import { Loader } from '../../components/Loader';
+import { DataTable } from '../../components/DataTable';
+import { StatusBadge } from '../../components/StatusBadge';
 
 export function EmployeeDashboardPage() {
+  const { user } = useAuth();
   const [stats, setStats] = useState<DashboardStats>({});
+  const [shipments, setShipments] = useState<Shipment[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dashboardService.employee()
-      .then(setStats)
-      .finally(() => setLoading(false));
-  }, []);
+    if (!user?.id) return;
+
+    const loadData = async () => {
+      try {
+        const [dashboardRes, shipmentsRes] = await Promise.all([
+          dashboardService.employee(user.id),
+          employeeService.shipments(user.id, 0, 5),
+        ]);
+        setStats(dashboardRes);
+        setShipments(shipmentsRes.content || []);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [user?.id]);
 
   if (loading) return <Loader label="Loading dashboard..." />;
 
-  const cards = [
-    { label: 'Assigned Shipments', value: stats.assignedShipments ?? 0, icon: Package },
-    { label: 'Completed', value: stats.completedShipments ?? 0, icon: CheckCircle },
-    { label: 'Pending Verification', value: stats.pendingVerification ?? 0, icon: ClipboardCheck },
+  const statCards = [
+    {
+      label: 'Total Shipments',
+      value: stats.totalShipments ?? 0,
+      icon: Package,
+      color: 'blue',
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-600',
+    },
+    {
+      label: 'Pending',
+      value: stats.pendingShipments ?? 0,
+      icon: Clock,
+      color: 'amber',
+      bgColor: 'bg-amber-50',
+      iconColor: 'text-amber-600',
+    },
+    {
+      label: 'Approved',
+      value: stats.approvedShipments ?? 0,
+      icon: CheckCircle,
+      color: 'green',
+      bgColor: 'bg-green-50',
+      iconColor: 'text-green-600',
+    },
+    {
+      label: 'Delivered',
+      value: stats.deliveredShipments ?? 0,
+      icon: Truck,
+      color: 'purple',
+      bgColor: 'bg-purple-50',
+      iconColor: 'text-purple-600',
+    },
   ];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-bold">Employee Dashboard</h1>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {cards.map((c) => (
-          <div key={c.label} className="rounded-xl border bg-white p-4">
-            <div className="mb-2 flex items-center justify-between">
-              <p className="text-sm text-slate-500">{c.label}</p>
-              <c.icon size={18} className="text-primary-600" />
+    <div className="space-y-8">
+      <div>
+        <h1 className="mb-2 text-3xl font-bold">Employee Dashboard</h1>
+        <p className="text-slate-600">Welcome back! Here's your shipment overview.</p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {statCards.map((card) => (
+          <div
+            key={card.label}
+            className={`rounded-xl border border-slate-200 ${card.bgColor} p-6 shadow-sm transition-shadow hover:shadow-md`}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <p className="font-semibold text-slate-700">{card.label}</p>
+              <card.icon size={24} className={card.iconColor} />
             </div>
-            <p className="text-2xl font-bold">{c.value}</p>
+            <p className="text-4xl font-bold text-slate-900">{card.value}</p>
           </div>
         ))}
+      </div>
+
+      {/* Assigned Shipments Section */}
+      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-slate-900">Assigned Shipments</h2>
+          <p className="mt-1 text-sm text-slate-600">Your current shipment assignments</p>
+        </div>
+
+        {shipments.length > 0 ? (
+          <div className="overflow-x-auto">
+            <DataTable
+              rows={shipments}
+              rowKey={(r) => r.shipmentId}
+              columns={[
+                { key: 'shipmentId', title: 'ID' },
+                { key: 'itemName', title: 'Item' },
+                { key: 'quantity', title: 'Qty' },
+                { key: 'weight', title: 'Weight (kg)' },
+                { key: 'originCountry', title: 'Origin' },
+                { key: 'destinationCountry', title: 'Destination' },
+                { key: 'transportMode', title: 'Mode' },
+                {
+                  key: 'client',
+                  title: 'Client',
+                  render: (r) => r.client?.name || 'N/A',
+                },
+                {
+                  key: 'status',
+                  title: 'Status',
+                  render: (r) => <StatusBadge status={r.status} />,
+                },
+              ]}
+            />
+          </div>
+        ) : (
+          <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 py-12 text-center">
+            <Package size={48} className="mx-auto mb-4 text-slate-400" />
+            <p className="text-slate-600">No shipments assigned yet.</p>
+          </div>
+        )}
       </div>
     </div>
   );
