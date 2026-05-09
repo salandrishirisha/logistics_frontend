@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import { authService } from '../services/authService';
 import { storage } from '../utils/storage';
-import { AuthResponse, LoginRequest, RegisterRequest, User } from '../types/auth';
+import type { AuthResponse, LoginRequest, RegisterRequest, User } from '../types/auth';
 
 type AuthContextType = {
   user: User | null;

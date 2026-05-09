@@ -1,6 +1,6 @@
 import { api } from '../api/axios';
-import { ApiPage } from '../types/common';
-import { Shipment } from '../types/shipment';
+import type { ApiPage } from '../types/common';
+import  type{ Shipment } from '../types/shipment';
 
 export const clientService = {
   createShipment: (clientId: number, payload: Omit<Shipment, 'shipmentId' | 'status' | 'createdDate'>) =>

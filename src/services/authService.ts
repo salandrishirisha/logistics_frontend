@@ -1,5 +1,5 @@
 import { api } from '../api/axios';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../types/auth';
+import type { AuthResponse, LoginRequest, RegisterRequest } from '../types/auth';
 
 export const authService = {
   register: async (payload: RegisterRequest) => {

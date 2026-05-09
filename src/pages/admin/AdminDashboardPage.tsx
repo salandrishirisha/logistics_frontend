@@ -6,8 +6,9 @@ import { DashboardStats } from '../../types/dashboard';
 import { Shipment } from '../../types/shipment';
 import { Loader } from '../../components/Loader';
 import { DataTable } from '../../components/DataTable';
-import { StatusBadge } from '../../components/StatusBadge';
 import { EmptyState } from '../../components/EmptyState';
+import   { StatusBadge } from '../../components/StatusBadge';
+
 
 export function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats>({});

@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { RegisterRequest } from '../../types/auth';
+import type { RegisterRequest } from '../../types/auth';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';

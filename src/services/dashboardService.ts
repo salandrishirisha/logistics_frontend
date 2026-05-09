@@ -1,5 +1,5 @@
 import { api } from '../api/axios';
-import { DashboardStats } from '../types/dashboard';
+import type { DashboardStats } from '../types/dashboard';
 
 export const dashboardService = {
   admin: () => api.get<DashboardStats>('/dashboard/admin').then((r) => r.data),
