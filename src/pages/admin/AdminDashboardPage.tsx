@@ -32,13 +32,54 @@ export function AdminDashboardPage() {
   }, []);
 
   const cards = [
-    { label: 'Total Shipments', value: stats.totalShipments ?? 0, icon: Package },
-    { label: 'Total Employees', value: stats.employeeCount ?? 0, icon: Users },
-    { label: 'Total Clients', value: stats.clientCount ?? 0, icon: UserPlus },
-    { label: 'Approved', value: stats.approvedShipments ?? 0, icon: CheckCircle },
-    { label: 'Rejected', value: stats.rejectedShipments ?? 0, icon: XCircle },
-    { label: 'Delivered', value: stats.deliveredShipments ?? 0, icon: XCircle },
-    { label: 'Overview', value: 'Admin', icon: LayoutDashboard },
+    {
+      label: 'Total Shipments',
+      value: stats.totalShipments ?? 0,
+      icon: Package,
+      color: 'blue',
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-600',
+    },
+    {
+      label: 'Total Employees',
+      value: stats.employeeCount ?? 0,
+      icon: Users,
+      color: 'green',
+      bgColor: 'bg-green-50',
+      iconColor: 'text-green-600',
+    },
+    {
+      label: 'Total Clients',
+      value: stats.clientCount ?? 0,
+      icon: UserPlus,
+      color: 'purple',
+      bgColor: 'bg-purple-50',
+      iconColor: 'text-purple-600',
+    },
+    {
+      label: 'Approved',
+      value: stats.approvedShipments ?? 0,
+      icon: CheckCircle,
+      color: 'emerald',
+      bgColor: 'bg-emerald-50',
+      iconColor: 'text-emerald-600',
+    },
+    {
+      label: 'Rejected',
+      value: stats.rejectedShipments ?? 0,
+      icon: XCircle,
+      color: 'red',
+      bgColor: 'bg-red-50',
+      iconColor: 'text-red-600',
+    },
+    {
+      label: 'Delivered',
+      value: stats.deliveredShipments ?? 0,
+      icon: LayoutDashboard,
+      color: 'indigo',
+      bgColor: 'bg-indigo-50',
+      iconColor: 'text-indigo-600',
+    },
   ];
 
   if (loading) return <Loader label="Loading dashboard..." />;
@@ -49,12 +90,15 @@ export function AdminDashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {cards.map((c) => (
-          <div key={c.label} className="rounded-xl border bg-white p-4">
-            <div className="mb-2 flex items-center justify-between">
-              <p className="text-sm text-slate-500">{c.label}</p>
-              <c.icon size={18} className="text-primary-600" />
+          <div
+            key={c.label}
+            className={`rounded-xl border border-slate-200 ${c.bgColor} p-6 shadow-sm transition-shadow hover:shadow-md`}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <p className="font-semibold text-slate-700">{c.label}</p>
+              <c.icon size={24} className={c.iconColor} />
             </div>
-            <p className="text-2xl font-bold text-slate-800">{c.value}</p>
+            <p className="text-4xl font-bold text-slate-900">{c.value}</p>
           </div>
         ))}
       </div>
